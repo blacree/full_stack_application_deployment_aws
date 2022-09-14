@@ -1,0 +1,6 @@
+terraform_ansible/.terraform/*
+terraform_loadbalancing_autoscaling/.terraform/*
+terraform_ansible/terraform.tfstate
+terraform_loadbalancing_autoscaling/terraform.tfstate
+terraform_ansible/terraform.tfstate.backup
+terraform_loadbalancing_autoscaling/terraform.tfstate.backup

@@ -1,0 +1,24 @@
+#!/bin/bash
+sudo apt update
+# sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+sudo DEBIAN_FRONTEND=noninteractive apt install python3.9 -y
+sudo DEBIAN_FRONTEND=noninteractive apt install python3-pip -y
+# sudo DEBIAN_FRONTEND=noninteractive apt install python3-venv -y
+# sudo DEBIAN_FRONTEND=noninteractive apt install ansible -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get install libpq-dev -y
+sudo DEBIAN_FRONTEND=noninteractive apt install python3.9-distutils -y
+sudo DEBIAN_FRONTEND=noninteractive apt install python3.9-dev -y
+mkdir ~/django_web_app
+set +o history
+#sudo git clone https://blacee:<pass_token>@github.com/blacree/Learning_logs.git ~/django_web_app
+sudo git clone https://github.com/blacree/Learning_logs.git ~/django_web_app
+set -o history
+# python3 -m venv ~/django_web_app/ll_env
+# source ~/django_web_app/ll_env/bin/activate
+# pip install --upgrade setuptools
+sudo python3.9 -m pip install wheel
+sudo python3.9 -m pip install -r ~/django_web_app/requirements.txt
+sudo python3.9 ~/django_web_app/manage.py makemigrations
+sudo python3.9 ~/django_web_app/manage.py migrate
+nohup sudo python3.9 ~/django_web_app/manage.py runserver 0.0.0.0:80 2> ~/django_web_app/webapp_logs &

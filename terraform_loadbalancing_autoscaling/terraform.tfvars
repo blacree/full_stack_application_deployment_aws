@@ -1,0 +1,5 @@
+ami_id = "ami-052efd3df9dad4825"
+instance_type = "t2.micro"
+vpc_id = "vpc-0ab05d5ad8dae6960"
+subnet_id = "subnet-00eaa0acc12767548"
+subnet_id_2 = "subnet-07b09f29cc80d3e8d"

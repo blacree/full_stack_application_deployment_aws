@@ -1,0 +1,66 @@
+- name: configure learning logs django app
+  hosts: all
+  remote_user: ubuntu
+  become: true
+
+  # vars_files:
+  # - git_vault.yaml
+
+  tasks:
+  # - name: get name root username
+  #   shell: whoami
+  #   become: true
+  #   register: username_returned
+
+  # - debug: msg={{username_returned.stdout}}
+
+  - name: update repository
+    apt: update-cache=yes
+
+  - name:  add deadsnakes repository
+    apt_repository:
+      repo: "ppa:deadsnakes/ppa"
+  
+  - name: install python3.9
+    apt:
+      name: python3.9
+  
+  - name: install pip for python 3
+    apt:
+      name: python3-pip
+      state: latest
+  
+  - name: install libpq-dev -- Dependency
+    apt:
+      name: libpq-dev
+      state: latest
+  
+  - name: install distutils (dependency) for python 3.9
+    apt:
+      name: python3.9-distutils
+  
+  - name: install dev (dependency) for python 3.9
+    apt:
+      name: python3.9-dev
+
+  - name: make directory called django_web_app
+    shell:
+      cmd: "mkdir /home/ubuntu/django_web_app"
+
+  - name: clone Learning logs repository
+    # shell: "sudo git clone https://{{username}}:{{token}}@github.com/{{username}}/Learning_logs.git /home/ubuntu/django_web_app"
+    shell: "sudo git clone https://github.com/blacree/Learning_logs.git /home/ubuntu/django_web_app"
+
+  - name: install wheel and other dependencies for learning logs app
+    shell: "sudo python3.9 -m pip install wheel; sudo python3.9 -m pip install -r /home/ubuntu/django_web_app/requirements.txt"
+
+  - name: make migrations in django app
+    shell: "sudo python3.9 manage.py makemigrations; sudo python3.9 manage.py migrate"
+    args:
+      chdir: /home/ubuntu/django_web_app
+  
+  - name: run the server
+    shell: "nohup sudo python3.9 manage.py runserver 0.0.0.0:80 2> webapp_logs &"
+    args:
+      chdir: /home/ubuntu/django_web_app
+        
