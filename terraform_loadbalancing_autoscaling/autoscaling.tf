@@ -18,7 +18,7 @@ resource "aws_launch_configuration" "tadpp_lc" {
     name = "tadpp_lauch_config"
     image_id = var.ami_id
     instance_type = var.instance_type
-    key_name = "blacree"
+    key_name = "<key-name>"
     user_data = file("launch_configuration.txt")
     security_groups = [aws_security_group.asg_sg.id]
 }

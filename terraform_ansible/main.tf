@@ -19,7 +19,7 @@ provider "aws" {
 
 locals {
   ansible_user = "ubuntu"
-  ansible_ssh_key = "/root/keypair/blacree"
+  ansible_ssh_key = "<ssh_key_path>"
   ansible_file = "ansible_djangoapp_config.yaml"
 }
 

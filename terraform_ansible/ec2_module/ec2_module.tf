@@ -1,6 +1,6 @@
 variable "ami_id"{
     type=string
-    default = "ami-052efd3df9dad4825"
+    default = "<ami-id>"
 }
 
 variable "ansible_user" {}
@@ -13,7 +13,7 @@ resource "aws_instance" "ami_instance"{
     ami = var.ami_id
     instance_type = "t2.micro"
     vpc_security_group_ids = [var.sg_id]
-    key_name = "blacree"
+    key_name = "<key-name>"
 
     tags = {
         Name = var.ec2_name

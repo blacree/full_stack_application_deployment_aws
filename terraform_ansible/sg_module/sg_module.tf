@@ -1,6 +1,6 @@
 variable "vpc_id"{
     type = string
-    default = "vpc-0ab05d5ad8dae6960"
+    default = "<vpc-id>"
 }
 
 variable "sg_name" {
